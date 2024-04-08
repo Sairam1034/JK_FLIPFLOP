@@ -24,23 +24,24 @@ STEP:7 compare the output with truth table.
 ![image](https://github.com/RESMIRNAIR/JK_FLIPFLOP/assets/154305926/04d4ff52-ae20-4e08-bd70-58137b129890)
 # Program
 ```
-module jkff(clk,j,k,rst,q );
-input j,k,clk,rst;
-output reg q;
-always@(posedge clk)
-begin
-if(rst==1)
-q=1'b0;
-else
-begin
-case({j,k})
-2'b00: q=q;
-2'b01:q=1'b0;
-2'b10:q=1'b1;
-2'b11:q=~q;
-endcase
-end
-end
+module JK_flipflop (q, q_bar, j,k, clk, reset);
+  input j,k,clk, reset;
+  output reg q;
+  output q_bar;
+  
+  always@(posedge clk) begin 
+    if(!reset)�        q <= 0;
+    else 
+  begin
+      case({j,k})
+        2'b00: q <= q;  
+        2'b01: q <= 1'b0; 
+        2'b10: q <= 1'b1; 
+        2'b11: q <= ~q; 
+      endcase
+    end
+  end
+  assign q_bar = ~q;
 endmodule
 ```
 # Output
